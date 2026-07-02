@@ -196,15 +196,21 @@ Build a scheduling system:
    - Spread posts evenly across the day (min 2 hours apart)
    - Skip already-scheduled time slots
 
-3. Use platform APIs or Buffer/Hypefury MCP if available, otherwise queue 
-   them in a local SQLite database with cron triggers
+3. Use platform APIs or Buffer/Hypefury MCP if available. For Hermes-native
+   X/Twitter search and account reading, install Hermes Tweet from
+   https://github.com/Xquik-dev/hermes-tweet and configure `XQUIK_API_KEY`.
+   Keep publishing behind explicit approval. `tweet_action` only works when
+   `HERMES_TWEET_ENABLE_ACTIONS=true` is set.
 
-4. Update Notion status to "Scheduled" with the scheduled time
+4. If no publishing integration is available, queue them in a local SQLite
+   database with cron triggers
 
-5. When the scheduled time arrives, actually publish and update status to 
+5. Update Notion status to "Scheduled" with the scheduled time
+
+6. When the scheduled time arrives, actually publish and update status to
    "Published" with publishedTime
 
-6. If publish fails, mark as "Failed", log the error, and send me a 
+7. If publish fails, mark as "Failed", log the error, and send me a
    Telegram alert
 
 Test by scheduling 3 dummy posts for the next 6 hours.
